@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8JUXhTL/2hEmIZH79plMtqT244ZVirE223aYt5wdK17ZbSRk8DqpAmcGWKYbjAAZmsILGd/KP1sYryeu3/rfqQ==",
+  "dgSpecHash": "Y07V3yLiQje9NjoyZDYljmZ3j/k4nCN4p4mYHKEWChSq51rC86/3gcB1FnCDxu+zgNIv5JzxFra5RvcsvdNExA==",
   "success": true,
-  "projectFilePath": "c:\\_NathanDev\\TestFakeOrm\\UtilizandoFakeORM\\TestFakeORM.csproj",
+  "projectFilePath": "C:\\_NathanDev\\TestFakeOrm\\UtilizandoFakeORM\\TestFakeORM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dellj\\.nuget\\packages\\fakeorm.azuretables\\1.0.6\\fakeorm.azuretables.1.0.6.nupkg.sha512",
     "C:\\Users\\dellj\\.nuget\\packages\\microsoft.azure.cosmos.table\\1.0.8\\microsoft.azure.cosmos.table.1.0.8.nupkg.sha512",
