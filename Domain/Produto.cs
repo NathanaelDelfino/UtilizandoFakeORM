@@ -7,11 +7,11 @@ namespace TestFakeOrm.Domain
         public int Id { get; private set; }
         public string CodigoBarras { get; private set; } = "";
         public string Descricao { get; private set; } = "";
-        public decimal PrecoDeVenda { get; private set; }
-        
+        public double PrecoDeVenda { get; private set; }
+
         public Produto()
         {
-            
+
         }
 
         public Produto(string codigoBarras, string descricao)
@@ -27,7 +27,7 @@ namespace TestFakeOrm.Domain
             Descricao = descricao;
         }
 
-        public Produto(int id, string codigoBarras, string descricao, decimal precoDeVenda)
+        public Produto(int id, string codigoBarras, string descricao, double precoDeVenda)
         {
             Id = id;
             CodigoBarras = codigoBarras;
@@ -35,7 +35,7 @@ namespace TestFakeOrm.Domain
             PrecoDeVenda = precoDeVenda;
         }
 
-        public void AlterarPrecoDeVenda(decimal precoDeVenda)
+        public void AlterarPrecoDeVenda(double precoDeVenda)
         {
             PrecoDeVenda = precoDeVenda;
         }

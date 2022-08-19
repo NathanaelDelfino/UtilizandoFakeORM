@@ -24,7 +24,7 @@ namespace TestFakeOrm.Controler
             try
             {
                 var produto = new Produto("123456789", "Produto 1");
-                produto.AlterarPrecoDeVenda(10.50m);
+                produto.AlterarPrecoDeVenda(10.50f);
                 var repository = new DbAppContextProduto();
                 repository.Save(produto);
                 return Ok("Ok");

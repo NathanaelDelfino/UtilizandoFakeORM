@@ -26,9 +26,8 @@ namespace UtilizandoFakeORM.Data
         public override List<Produto> Carregar<Produto>()
         {
 
-            var lista = _produtoRepository.GetAsync().Result;
-
-            return null;
+            var lista = _produtoRepository.GetAsync(x => x.CodigoBarras != "").Result;
+            return (List<Produto>)lista;
         }
 
         public override void Save(BaseEntity entity)
