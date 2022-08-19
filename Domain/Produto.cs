@@ -9,6 +9,11 @@ namespace TestFakeOrm.Domain
         public string Descricao { get; private set; } = "";
         public decimal PrecoDeVenda { get; private set; }
         
+        public Produto()
+        {
+            
+        }
+
         public Produto(string codigoBarras, string descricao)
         {
             CodigoBarras = codigoBarras;

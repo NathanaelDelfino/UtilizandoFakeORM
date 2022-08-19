@@ -1,30 +1,27 @@
-using FakeOrm.AzureTables.DependencyInjection;
+using FakeOrm.AzureTables.Configurations;
 using FakeOrm.AzureTables.Domain;
 using FakeOrm.AzureTables.Repositories;
-using FakeOrm.AzureTables.Repositories.Interface;
 using TestFakeOrm.Domain;
+using UtilizandoFakeORM.Data;
 
 namespace TestFakeOrm.Data
 {
-    public class DbAppContext 
+    public class DbAppContext : IDbAppContext
     {
-        public IConfiguration Configuration { get; }
-        private readonly IAzureTableRepository<Produto> _ProdutoRepository;
+        private readonly ConnectionStrings _connectionStrings;
 
-        public DbAppContext(IServiceCollection services)
+        public DbAppContext()
         {
-            ConfigureServices(services);
+            _connectionStrings = new ConnectionStrings();
+            _connectionStrings.AzureTableConnection ="DefaultEndpointsProtocol=https;AccountName=caprojetodeestudoeastus;AccountKey=j5YCrR6yXvxHf7dNK3JGvJg4yoozUCkeqqgtNYTAhPYmNoElafI6nMrh6XxEgcFLnnv/5nM1F5rz+AStuq6c5A==;EndpointSuffix=core.windows.net";
         }
-
+        
         public void Save(BaseEntity entity)
         {
-            if (entity is Produto)
-                _ProdutoRepository.CreateOrUpdateAsync((Produto)entity);
-        }
-
-        private void ConfigureServices(IServiceCollection services)
-        {
-            services.UseAzureTablesRepository(Configuration.GetConnectionString("AzureTableConnection"));
+            if (entity is Produto){
+                var repository = new AzureTableRepository<Produto>(_connectionStrings);
+                repository.CreateOrUpdateAsync((Produto)entity);
+            }
         }
     }
 }
