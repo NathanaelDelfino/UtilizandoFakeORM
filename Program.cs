@@ -1,15 +1,11 @@
-using FakeOrm.AzureTables.DependencyInjection;
-using FakeOrm.AzureTables.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 using TestFakeOrm.Data;
 using TestFakeOrm.Domain;
 using UtilizandoFakeORM.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<IDbAppContext, DbAppContext>();
-builder.Services.AddControllersWithViews();
+//builder.Services.AddTransient<IDbAppContext, DbAppContext>();
+//builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -20,16 +16,32 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 
-app.MapGet("/produto", () =>
+app.MapPost("/produto", () =>
 {
     try
     {
         var produto = new Produto("123456789", "Produto 1");
-        
-       var repository = new DbAppContext();
-       repository.Save(produto);
-        
+
+        var repository = new DbAppContextProduto();
+        repository.Save(produto);
+
         return Results.Ok("Ok");
+    }
+    catch (System.Exception ex)
+    {
+        return Results.BadRequest(ex.Message);
+        throw;
+    }
+});
+
+app.MapGet("/produto", () =>
+{
+    try
+    {
+        var repository = new DbAppContextProduto();
+        var lista = repository.Carregar<Produto>();
+        return Results.Ok(lista);
+
     }
     catch (System.Exception ex)
     {
