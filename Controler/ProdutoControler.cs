@@ -10,23 +10,23 @@ namespace TestFakeOrm.Controler
     [Route("v1")]
     public class ProdutoControler : ControllerBase
     {
-        // IDbAppContext _repository;
+        IDbAppContext _repository;
 
-        // public ProdutoControler(IDbAppContext repository)
-        // {
-        //     _repository = repository;
-        // }
+        public ProdutoControler(IDbAppContext repository)
+        {
+            _repository = repository;
+        }
 
         [HttpPost]
         [Route("produto")]
-        public async Task<IActionResult> SalvarProduto()
+        public IActionResult SalvarProduto()
         {
             try
             {
                 var produto = new Produto("123456789", "Produto 1");
                 produto.AlterarPrecoDeVenda(10.50f);
-                var repository = new DbAppContextProduto();
-                repository.Save(produto);
+                //var repository = new DbAppContextProduto();
+                _repository.Save(produto);
                 return Ok("Ok");
             }
             catch (System.Exception ex)
@@ -38,11 +38,19 @@ namespace TestFakeOrm.Controler
 
         [HttpGet]
         [Route("produto")]
-        public async Task<IActionResult> ObterProdutos()
+        public IActionResult ObterProdutos()
         {
-            var repository = new DbAppContextProduto();
-            var lista = repository.Carregar<Produto>();
-            return Ok(lista);
+            try
+            {
+                //var repository = new DbAppContextProduto();
+                var lista = _repository.Carregar<Produto>();
+                return Ok(lista);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+                throw;
+            }
         }
     }
 }
