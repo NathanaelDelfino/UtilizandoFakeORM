@@ -1,5 +1,4 @@
 using FakeOrm.AzureTables.Configurations;
-using FakeOrm.AzureTables.Domain;
 using FakeOrm.AzureTables.Repositories;
 using TestFakeOrm.Domain;
 using UtilizandoFakeORM.Data;
@@ -22,8 +21,28 @@ namespace TestFakeOrm.Data.Domain
 
         public void SaveChanges()
         {
+            // var propertis = this;
+            // foreach (var item in propertis.GetType().GetProperties())
+            // {
+            //     var dbSet = item.GetType(propertis);
+            //     var repository = new AzureTableRepository<dbSet>(_connectionStrings);
+            //     foreach (var entity in ((DbSet<dbSet>)dbSet).Get())
+            //         repository.CreateOrUpdateAsync(entity);
+            // }
+
             if (Produtos != null)
-                Produtos.Save(_connectionStrings);
+            {
+                var repository = new AzureTableRepository<Produto>(_connectionStrings);
+                foreach (var item in Produtos.Get())
+                    repository.CreateOrUpdateAsync(item);
+            }
+            if (Clientes != null)
+            {
+                var repository = new AzureTableRepository<Cliente>(_connectionStrings);
+                foreach (var item in Produtos.Get())
+                    repository.CreateOrUpdateAsync(item);
+            }
+
 
         }
     }

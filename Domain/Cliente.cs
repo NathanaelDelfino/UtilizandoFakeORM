@@ -1,6 +1,8 @@
-namespace TestFakeOrm.Data.Domain
+using FakeOrm.AzureTables.Domain;
+
+namespace TestFakeOrm.Domain
 {
-    public class Cliente
+    public class Cliente : BaseEntity
     {
         public Cliente(string nome)
         {

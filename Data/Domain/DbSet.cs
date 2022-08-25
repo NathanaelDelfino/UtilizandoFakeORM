@@ -31,12 +31,17 @@ namespace UtilizandoFakeORM.Data.Domain
             _lista.Remove(entity);
         }
 
-        public void Save(ConnectionStrings connectionStrings)
+        public List<TEntity> Get()
         {
-            var repository = new AzureTableRepository<TEntity>(connectionStrings);
-            foreach (var item in _lista)
-                repository.CreateOrUpdateAsync(item);
-
+            return _lista;
         }
+
+        // public void Save(ConnectionStrings connectionStrings)
+        // {
+        //     var repository = new AzureTableRepository<TEntity>(connectionStrings);
+        //     foreach (var item in _lista)
+        //         repository.CreateOrUpdateAsync(item);
+
+        // }
     }
 }
