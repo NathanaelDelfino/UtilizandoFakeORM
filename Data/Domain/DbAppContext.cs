@@ -8,8 +8,8 @@ namespace TestFakeOrm.Data.Domain
 {
     public class DbAppContext : IDbAppContext
     {
-        public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Produto> Produtos { get; set; } = new DbSet<Produto>();
+        public DbSet<Cliente> Clientes { get; set; } = new DbSet<Cliente>();
 
         protected ConnectionStrings _connectionStrings;
 
@@ -21,28 +21,18 @@ namespace TestFakeOrm.Data.Domain
 
         public void SaveChanges()
         {
-            // var propertis = this;
-            // foreach (var item in propertis.GetType().GetProperties())
-            // {
-            //     var dbSet = item.GetType(propertis);
-            //     var repository = new AzureTableRepository<dbSet>(_connectionStrings);
-            //     foreach (var entity in ((DbSet<dbSet>)dbSet).Get())
-            //         repository.CreateOrUpdateAsync(entity);
-            // }
-
-            if (Produtos != null)
+            if (Clientes.HasItens())
+            {
+                var repository = new AzureTableRepository<Cliente>(_connectionStrings);
+                foreach (var item in Clientes.Get())
+                    repository.CreateOrUpdateAsync(item);
+            }
+            if (Produtos.HasItens())
             {
                 var repository = new AzureTableRepository<Produto>(_connectionStrings);
                 foreach (var item in Produtos.Get())
                     repository.CreateOrUpdateAsync(item);
             }
-            if (Clientes != null)
-            {
-                var repository = new AzureTableRepository<Cliente>(_connectionStrings);
-                foreach (var item in Produtos.Get())
-                    repository.CreateOrUpdateAsync(item);
-            }
-
 
         }
     }

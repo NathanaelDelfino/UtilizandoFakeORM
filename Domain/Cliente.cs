@@ -4,6 +4,11 @@ namespace TestFakeOrm.Domain
 {
     public class Cliente : BaseEntity
     {
+        public Cliente()
+        {
+
+        }
+
         public Cliente(string nome)
         {
             Id = Guid.NewGuid().ToString("N");

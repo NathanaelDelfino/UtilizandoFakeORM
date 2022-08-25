@@ -36,6 +36,15 @@ namespace UtilizandoFakeORM.Data.Domain
             return _lista;
         }
 
+        public int ItensAmount()
+        {
+            return _lista.Count();
+        }
+
+        public bool HasItens()
+        {
+            return _lista.Count() > 0;
+        }
         // public void Save(ConnectionStrings connectionStrings)
         // {
         //     var repository = new AzureTableRepository<TEntity>(connectionStrings);
