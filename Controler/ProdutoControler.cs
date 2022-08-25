@@ -1,6 +1,7 @@
 using FakeOrm.AzureTables.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 using TestFakeOrm.Data;
+using TestFakeOrm.Data.Domain;
 using TestFakeOrm.Domain;
 using UtilizandoFakeORM.Data;
 
@@ -10,9 +11,9 @@ namespace TestFakeOrm.Controler
     [Route("v1")]
     public class ProdutoControler : ControllerBase
     {
-        IDbAppContext _repository;
+        DbAppContext _repository;
 
-        public ProdutoControler(IDbAppContext repository)
+        public ProdutoControler(DbAppContext repository)
         {
             _repository = repository;
         }
@@ -25,8 +26,8 @@ namespace TestFakeOrm.Controler
             {
                 var produto = new Produto("123456789", "Produto 1");
                 produto.AlterarPrecoDeVenda(10.50f);
-                //var repository = new DbAppContextProduto();
-                _repository.Save(produto);
+                _repository.Produtos.Add(produto);
+                _repository.SaveChanges();
                 return Ok("Ok");
             }
             catch (System.Exception ex)
@@ -42,9 +43,11 @@ namespace TestFakeOrm.Controler
         {
             try
             {
-                //var repository = new DbAppContextProduto();
-                var lista = _repository.Carregar<Produto>();
-                return Ok(lista);
+
+                //_repository.Produto.Add();
+                //_repository.SaveChanges();
+                //return Ok(lista);
+                return Ok();
             }
             catch (System.Exception ex)
             {

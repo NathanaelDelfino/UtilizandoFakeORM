@@ -1,10 +1,10 @@
+using TestFakeOrm.Data.Domain;
 using UtilizandoFakeORM.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<IDbAppContext, DbAppContextProduto>();
-//builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IDbAppContext, DbAppContext>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
