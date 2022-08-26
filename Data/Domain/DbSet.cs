@@ -16,10 +16,11 @@ namespace UtilizandoFakeORM.Data.Domain
     {
 
         private List<TEntity> _lista;
-
+        
         public DbSet()
         {
             _lista = new List<TEntity>();
+            
         }
 
         public void Add(TEntity entity)
@@ -49,10 +50,12 @@ namespace UtilizandoFakeORM.Data.Domain
 
         public void Save(ConnectionStrings connectionStrings)
         {
-            var repository = new AzureTableRepository<TEntity>(connectionStrings);
-            foreach (var item in _lista)
-                repository.CreateOrUpdateAsync(item);
-
+            if (HasItens())
+            {
+                var repository = new AzureTableRepository<TEntity>(connectionStrings);
+                foreach (var item in _lista)
+                    repository.CreateOrUpdateAsync(item);
+            }
         }
     }
 }

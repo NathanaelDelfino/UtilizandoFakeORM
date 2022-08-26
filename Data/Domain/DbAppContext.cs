@@ -23,13 +23,9 @@ namespace TestFakeOrm.Data.Domain
 
         public void SaveChanges()
         {
-            if (Clientes.HasItens())
-                Clientes.Save(_connectionStrings);
-            if (Produtos.HasItens())
-                Produtos.Save(_connectionStrings);
-            if (Funcionarios.HasItens())
-                Funcionarios.Save(_connectionStrings);
-
+            Clientes.Save(_connectionStrings);            
+            Produtos.Save(_connectionStrings);            
+            Funcionarios.Save(_connectionStrings);
         }
     }
 }
