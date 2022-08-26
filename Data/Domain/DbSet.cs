@@ -12,8 +12,9 @@ using TestFakeOrm.Domain;
 
 namespace UtilizandoFakeORM.Data.Domain
 {
-    public class DbSet<TEntity> where TEntity : class
+    public class DbSet<TEntity> where TEntity : BaseEntity, new()
     {
+
         private List<TEntity> _lista;
 
         public DbSet()
@@ -45,12 +46,13 @@ namespace UtilizandoFakeORM.Data.Domain
         {
             return _lista.Count() > 0;
         }
-        // public void Save(ConnectionStrings connectionStrings)
-        // {
-        //     var repository = new AzureTableRepository<TEntity>(connectionStrings);
-        //     foreach (var item in _lista)
-        //         repository.CreateOrUpdateAsync(item);
 
-        // }
+        public void Save(ConnectionStrings connectionStrings)
+        {
+            var repository = new AzureTableRepository<TEntity>(connectionStrings);
+            foreach (var item in _lista)
+                repository.CreateOrUpdateAsync(item);
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 using FakeOrm.AzureTables.Configurations;
 using FakeOrm.AzureTables.Repositories;
 using TestFakeOrm.Domain;
+using TestFakeORM.Domain;
 using UtilizandoFakeORM.Data;
 using UtilizandoFakeORM.Data.Domain;
 
@@ -10,6 +11,7 @@ namespace TestFakeOrm.Data.Domain
     {
         public DbSet<Produto> Produtos { get; set; } = new DbSet<Produto>();
         public DbSet<Cliente> Clientes { get; set; } = new DbSet<Cliente>();
+        public DbSet<Funcionario> Funcionarios { get; set; } = new DbSet<Funcionario>();
 
         protected ConnectionStrings _connectionStrings;
 
@@ -22,17 +24,11 @@ namespace TestFakeOrm.Data.Domain
         public void SaveChanges()
         {
             if (Clientes.HasItens())
-            {
-                var repository = new AzureTableRepository<Cliente>(_connectionStrings);
-                foreach (var item in Clientes.Get())
-                    repository.CreateOrUpdateAsync(item);
-            }
+                Clientes.Save(_connectionStrings);
             if (Produtos.HasItens())
-            {
-                var repository = new AzureTableRepository<Produto>(_connectionStrings);
-                foreach (var item in Produtos.Get())
-                    repository.CreateOrUpdateAsync(item);
-            }
+                Produtos.Save(_connectionStrings);
+            if (Funcionarios.HasItens())
+                Funcionarios.Save(_connectionStrings);
 
         }
     }
