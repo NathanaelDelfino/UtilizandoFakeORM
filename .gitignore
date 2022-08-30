@@ -612,3 +612,6 @@ FodyWeavers.xsd
 *lol
 
 # End of https://www.toptal.com/developers/gitignore/api/test
+.vs/TestFakeORM/v17/.futdcache.v1
+.vs/TestFakeORM/v17/.suo
+.vs/TestFakeORM/v17/TestStore/0/000.testlog
