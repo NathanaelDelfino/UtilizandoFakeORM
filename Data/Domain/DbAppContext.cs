@@ -1,4 +1,5 @@
 using FakeOrm.AzureTables.Configurations;
+using FakeOrm.AzureTables.Domain;
 using FakeOrm.AzureTables.Repositories;
 using TestFakeOrm.Domain;
 using TestFakeORM.Domain;
@@ -9,9 +10,13 @@ namespace TestFakeOrm.Data.Domain
 {
     public class DbAppContext : IDbAppContext
     {
-        public DbSet<Produto> Produtos { get; set; } = new DbSet<Produto>();
-        public DbSet<Cliente> Clientes { get; set; } = new DbSet<Cliente>();
-        public DbSet<Funcionario> Funcionarios { get; set; } = new DbSet<Funcionario>();
+        private DbSet<Produto> _produtos;
+        private DbSet<Cliente> _clientes;
+        public DbSet<Funcionario> _funcionarios;
+
+        public DbSet<Produto> Produtos => (this._produtos ??= new DbSet<Produto>());
+        public DbSet<Cliente> Clientes => (this._clientes ??= new DbSet<Cliente>());
+        public DbSet<Funcionario> Funcionarios => (this._funcionarios ??= new DbSet<Funcionario>());
 
         protected ConnectionStrings _connectionStrings;
 
@@ -23,9 +28,9 @@ namespace TestFakeOrm.Data.Domain
 
         public void SaveChanges()
         {
-            Clientes.Save(_connectionStrings);            
-            Produtos.Save(_connectionStrings);            
-            Funcionarios.Save(_connectionStrings);
+            if (_produtos != null) _produtos.Save(_connectionStrings);
+            if (_clientes != null) _clientes.Save(_connectionStrings);
+            if (_funcionarios != null) _funcionarios.Save(_connectionStrings);           
         }
     }
 }
