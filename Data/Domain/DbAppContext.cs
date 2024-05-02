@@ -13,7 +13,7 @@ namespace TestFakeOrm.Data.Domain
         public DbAppContext()
         {
             _connectionStrings = new ConnectionStrings();
-            _connectionStrings.AzureTableConnection = "DefaultEndpointsProtocol=https;AccountName=caprojetodeestudoeastus;AccountKey=j5YCrR6yXvxHf7dNK3JGvJg4yoozUCkeqqgtNYTAhPYmNoElafI6nMrh6XxEgcFLnnv/5nM1F5rz+AStuq6c5A==;EndpointSuffix=core.windows.net";
+            _connectionStrings.AzureTableConnection = "{Aqui vai sua conection string do Azure Table}";
 
         }
 
